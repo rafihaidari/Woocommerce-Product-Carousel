@@ -37,6 +37,7 @@ h2::after {
   height: 370px;
   width: 100%;
   position: relative;
+  cursor: pointer;
 }
 .carousel .item img {
   max-width: 100%;
@@ -50,10 +51,10 @@ h2::after {
   top: 15px;
 }
 .carousel .item h4 {
-  font-size: 18px;
   margin: 10px 0;
   color: #000;
-  font-size: 22px;
+  font-size: 18px;
+  font-weight: 600;
 }
 .carousel .item .btn {
   text-transform: uppercase;
@@ -116,8 +117,9 @@ h2::after {
   margin-right: 5px;
 }
 .carousel .item-price span {
-  color: #86bd57;
-  font-size: 110%;
+  color: #000000d6;
+  font-size: 18px;
+  font-weight: 700;
 }
 .carousel .carousel-control.left i {
   margin-left: -3px;
@@ -133,7 +135,7 @@ h2::after {
   width: 10px;
   height: 10px;
   margin: 4px;
-  border-radius:0;
+  border-radius: 0;
   border-color: transparent;
 }
 .carousel-indicators li {
@@ -142,14 +144,14 @@ h2::after {
 .carousel-indicators li.active {
   background: rgba(0, 0, 0, 0.6) !important;
   transform: scaleY(2);
-  transition: transform .2s,opacity .2s;
+  transition: transform 0.2s, opacity 0.2s;
 }
 .star-rating li {
   padding: 0;
 }
 .star-rating i {
-  font-size: 14px;
-  color: #ffc000;
+  font-size: 18px;
+  color: #f47c25;
 }
 
 .modal {
@@ -335,5 +337,11 @@ a.carousel-control.left.carousel-control-prev {
   border-radius: 0 45px 45px 0;
 }
 .page_content_wrap {
-    padding: 4.9em 0 10.85em;
+  padding: 4.9em 0 10.85em;
+}
+::placeholder {
+    font-size: 12px !important;
+    font-family: sans-serif !important;
+    color: #80808087 !important;
+    letter-spacing: 1px !important;
 }
