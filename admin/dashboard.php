@@ -98,6 +98,14 @@ class Dashboard
             'wooCommerce-product-carousel',
             'setting_section_id'
         );
+
+        add_settings_field(
+            'giftchoice',
+            'Gift Category Choice',
+            array($this, 'giftchoice_callback'),
+            'wooCommerce-product-carousel',
+            'setting_section_id'
+        );
     }
 
     /**
@@ -115,8 +123,10 @@ class Dashboard
         if (isset($input['categorychoice']))
             $new_input['categorychoice'] = array_map('sanitize_text_field', wp_unslash($input['categorychoice']));
 
-        // print_r((get_option('woo_product_carousel')['categorychoice']));
-        // die;
+        if (isset($input['giftchoice']))
+            $new_input['giftchoice'] = array_map('sanitize_text_field', wp_unslash($input['giftchoice']));
+
+
 
         return $new_input;
     }
@@ -162,7 +172,44 @@ class Dashboard
 
         foreach ($all_categories as $category) {
             $selected = in_array($category->cat_name, $this->options['categorychoice']) ? ' selected="selected" ' : '';
-            echo '<option value="' . $category->cat_name. '" ' . $selected . '>';
+            echo '<option value="' . $category->cat_name . '" ' . $selected . '>';
+            echo $category->cat_name . ' (' . $category->category_count . ')';
+            echo '</option>';
+        }
+        echo '</select>';
+    }
+
+    public function giftchoice_callback()
+    {
+        $taxonomy     = 'product_cat';
+        $orderby      = 'name';
+        $show_count   = 0;      // 1 for yes, 0 for no
+        $pad_counts   = 0;      // 1 for yes, 0 for no
+        $hierarchical = 1;      // 1 for yes, 0 for no  
+        $title        = '';
+        $empty        = 0;
+
+        $args = array(
+            'taxonomy'     => $taxonomy,
+            'orderby'      => $orderby,
+            'show_count'   => $show_count,
+            'pad_counts'   => $pad_counts,
+            'hierarchical' => $hierarchical,
+            'title_li'     => $title,
+            'hide_empty'   => $empty
+        );
+        $all_categories = get_categories($args);
+
+        $style = "min-width: 300px;
+        min-height: 115px;
+        border-radius: 0;
+        border: 1px solid #007cba;";
+
+        echo '<select multiple="multiple" id="giftchoice" style="' . $style . '" name="woo_product_carousel[giftchoice][]">';
+
+        foreach ($all_categories as $category) {
+            $selected = in_array($category->cat_name, $this->options['giftchoice']) ? ' selected="selected" ' : '';
+            echo '<option value="' . $category->cat_name . '" ' . $selected . '>';
             echo $category->cat_name . ' (' . $category->category_count . ')';
             echo '</option>';
         }

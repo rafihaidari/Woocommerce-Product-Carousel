@@ -25,16 +25,32 @@ class ProductLoad
         add_action('wp_ajax_nopriv_load_products_list', 'load_products_list');
         function load_products_list()
         {
-            $getCats = get_option('woo_product_carousel')['categorychoice'];
-            foreach ($getCats as $getCat) {
-                $all_cats .= $getCat . ',';
+            if ($_POST['param'] === 'giftsList') {
+
+                $getCats = get_option('woo_product_carousel')['giftchoice'];
+                foreach ($getCats as $getCat) {
+                    $all_cats .= $getCat . ',';
+                }
+
+                $args = array(
+                    'post_type'      => 'product',
+                    'posts_per_page' => -1,
+                    'product_cat'    => $all_cats,
+                );
+            } else {
+
+                $getCats = get_option('woo_product_carousel')['categorychoice'];
+                foreach ($getCats as $getCat) {
+                    $all_cats .= $getCat . ',';
+                }
+
+                $args = array(
+                    'post_type'      => 'product',
+                    'posts_per_page' => -1,
+                    'product_cat'    => $all_cats,
+                );
             }
 
-            $args = array(
-                'post_type'      => 'product',
-                'posts_per_page' => -1,
-                'product_cat'    => $all_cats,
-            );
             global $product;
             $loop = new WP_Query($args);
             $response = array();

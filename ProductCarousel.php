@@ -61,7 +61,8 @@ register_deactivation_hook(__FILE__, array($ProductCarousel, 'deactivate_plugin'
 function wooCommerce_product_carousel()
 {
     if (!is_admin()) {
-        return include('SliderTemplate.php');
+        include('SliderTemplate.php');
     }
+    
 }
 add_shortcode('product-carousel', 'wooCommerce_product_carousel');

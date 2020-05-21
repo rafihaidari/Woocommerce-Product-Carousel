@@ -33,9 +33,10 @@ if (!defined('ABSPATH')) {
             </div>
         </div>
 
-        <?php include_once('CheckoutTemplate.php') ?>
-
     </div>
+
+    <?php include_once('CheckoutTemplate.php') ?>
+    <?php include_once('GiftTemplate.php') ?>
 
 </div>
 
@@ -45,7 +46,7 @@ if (!defined('ABSPATH')) {
         <!-- Modal content-->
         <div class="modal-content" style="border-radius: 0;">
             <div class="row" style="margin: 0; padding:0">
-                <div class="col-md-5" style="background:#84976f30;min-height: 630px;">
+                <div class="col-md-5 gallery-col" style="background:#84976f30;min-height: 550px;">
 
                     <div class="product-slider">
                         <div id="carousel" class="" data-ride="carousel">
@@ -73,7 +74,8 @@ if (!defined('ABSPATH')) {
                         <h4 class="modal-title" id="modal-title" style="display: inline-block;color: #000;font-size:25px;">
                             <!-- Data will be added here by Ajax-load.js -->
                         </h4>
-                        <a href="#" class="btn btn-primary send-btn"><?php echo get_option('woo_product_carousel')['button_name']; ?> <span id="btn-price"></span></a>
+
+                        <button id="" class="btn btn-primary addToCart modalAddToCart phoen-login-signup-popup-open" data-proid="" add-to-type="main-products-popup"><?php echo get_option('woo_product_carousel')['button_name']; ?> <span id="btn-price"></span></button>
                     </div>
                     <div class="modal-body">
                         <!-- Data will be added here by Ajax-load.js -->
