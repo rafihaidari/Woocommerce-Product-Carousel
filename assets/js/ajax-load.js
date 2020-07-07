@@ -2,10 +2,10 @@ jQuery(document).ready(function ($) {
 
     var getPage = $('#product-page');
     //For localhost
-    let base_url = window.location.origin + '/mamazon';
+    // let base_url = window.location.origin + '/mamazon';
 
     //For live site
-    // let base_url = window.location.origin + '';
+    let base_url = window.location.origin + '';
 
     if (getPage.length > 0) {
         // AJAX request
@@ -132,7 +132,7 @@ jQuery(document).ready(function ($) {
                             getImageGallery = '<img src="' + result[i][j]['product_image_id'] + '" class="img-responsive img-fluid" alt="">';
                         }
 
-                        itemList += '<div class="col-sm-12 col-md-4"><div class="thumb-wrapper"> <div class="img-box fader itemClick" data-id="' + result[i][j]['product_id'] + '"> <button class="productinfo itemClick" data-id="' + result[i][j]['product_id'] + '" style="position:absolute;z-index:100"> <i class="fa fa-info"></i> </button> <img src="' + result[i][j]['product_image_id'] + '" class="img-responsive img-fluid" alt="">' + getImageGallery + '</div> <div class="thumb-content"> <h4>' + result[i][j]['product_name'] + '</h4> <p class="item-price"><span>' + result[i][j]['product_currency_symbol'] + result[i][j]['product_price'] + '</span></p> <div class="star-rating"> <ul class="list-inline"> ' + starRating + '</ul> </div> <button id="addToCart_' + result[i][j]['product_id'] + '" class="btn btn-primary addToCart phoen-login-signup-popup-open" data-id="' + result[i][j]['product_id'] + '" add-to-type="main-products">' + $('#send_button_name').val() + '</button> </div> </div> </div>';
+                        itemList += '<div class="col-sm-12 col-md-4"><div class="thumb-wrapper"> <div class="img-box fader itemClick" data-id="' + result[i][j]['product_id'] + '"><span style="position: absolute;bottom: -25px;left: 10px;">More info...</span> <button class="productinfo itemClick" data-id="' + result[i][j]['product_id'] + '" style="position:absolute;z-index:100;    right:10px;top: 10px;"> <i class="fa fa-info"></i> </button> <img src="' + result[i][j]['product_image_id'] + '" class="img-responsive img-fluid" alt="">' + getImageGallery + '</div> <div class="thumb-content"> <h4>' + result[i][j]['product_name'] + '</h4> <p class="item-price"><span>' + result[i][j]['product_currency_symbol'] + result[i][j]['product_price'] + '</span></p> <div class="star-rating"> <ul class="list-inline"> ' + starRating + '</ul> </div> <button id="addToCart_' + result[i][j]['product_id'] + '" class="btn btn-primary addToCart phoen-login-signup-popup-open" data-id="' + result[i][j]['product_id'] + '" add-to-type="main-products">' + $('#send_button_name').val() + '</button> </div> </div> </div>';
                     }
                     itemList += '</div>';
 
@@ -144,7 +144,6 @@ jQuery(document).ready(function ($) {
 
         }
         appendItemToSlider();
-
 
         function appendItemToGift() {
 
@@ -291,8 +290,8 @@ jQuery(document).ready(function ($) {
                     // console.log(response);
                     addProduct();
                     $('.addToLoading').remove();
-                    $('.added').remove();
-                    $('.giftClicked').append("<span style='font-size:13px;padding-left: 4px;' class='added'>&#10004;</span>");
+                    $('.check-mark').remove();
+                    $('.giftClicked').append("<span class='check-mark'></span>");
 
                     if (response == 'yes') {
                         //This class is belongs to Woocommerce Login / Signup Lite plugin
@@ -425,7 +424,6 @@ jQuery(document).ready(function ($) {
             jQuery('#myModal').modal('show');
         });
 
-
         $('#for_delivery_on_btn').click(function () {
             var datePicker = $('#flatpickr').val();
             if (datePicker == '') {
@@ -453,7 +451,9 @@ jQuery(document).ready(function ($) {
 
         })
 
+
         $('#save_location_address').click(function () {
+
             var loading = '<img src="' + base_url + '/wp-content/plugins/woocommerce-product-carousel/assets/images/loading.gif" style="width: 15px;position: relative;right: -10px" id="loading-image">';
             $('#loading-image').remove();
 
@@ -539,6 +539,40 @@ jQuery(document).ready(function ($) {
 
         });
 
+        function phonenumber(inputtxt) {
+            var phoneno = /^\(?(\d{3})\)?[-\. ]?(\d{3})[-\. ]?(\d{4})$/;
+            if (inputtxt.match(phoneno)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        $('#billing_phone').keyup(function () {
+            if (!phonenumber($('#billing_phone').val())) {
+                $('#billing_phone_alert').show();
+                $('#save_billing_address').attr('disabled', 'disabled');
+            }
+            else {
+                $('#save_billing_address').removeAttr('disabled');
+                $('#billing_phone_alert').hide();
+
+            }
+        });
+
+        $('#account_phone').keyup(function () {
+            if (!phonenumber($('#account_phone').val())) {
+                $('#shipping_phone_alert').show();
+                $('#save_location_address').attr('disabled', 'disabled');
+            }
+            else {
+                $('#save_location_address').removeAttr('disabled');
+                $('#shipping_phone_alert').hide();
+
+            }
+        });
+
+
         $('#save_billing_address').click(function () {
             var loading = '<img src="' + base_url + '/wp-content/plugins/woocommerce-product-carousel/assets/images/loading.gif" style="width: 15px;position: relative;right: -10px" id="loading-image">';
 
@@ -623,8 +657,6 @@ jQuery(document).ready(function ($) {
             }
 
         });
-
-
 
         $('#to_payment_btn').click(function () {
             localStorage.setItem('card-note', $('#card-message').val());
@@ -719,14 +751,14 @@ jQuery(document).ready(function ($) {
             defaultMinute: 0,
 
             // The minimum date that a user can start picking from, as a JavaScript Date.
-            minDate: null,
+            minDate: new Date(),
 
             // The maximum date that a user can pick to, as a JavaScript Date. 
             maxDate: null,
 
             // Dates to disable, using intervals
             // disable: [ { 'from': '2015-09-02', 'to': '2015-10-02' } ]
-            disable: [{ 'from': '05-05-2020', 'to': '05-10-2020' }],
+            disable: [],
 
             // Set disableMobile to true to always use the non-native picker.
             // By default, flatpickr utilizes native datetime widgets unless certain options (e.g. disable) are used.
@@ -788,7 +820,6 @@ jQuery(document).ready(function ($) {
         $('.col').addClass('col-sm-12');
         $('#cboxWrapper').addClass('col-sm-12');
         $('#colorbox').addClass('col-sm-12');
-
 
     }
 

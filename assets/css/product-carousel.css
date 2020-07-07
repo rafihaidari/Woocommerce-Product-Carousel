@@ -399,16 +399,10 @@ a.carousel-control.left.carousel-control-prev {
 }
 .giftAddToCart {
   float: right;
-  min-width: 55px;
+  min-width: 65px;
   padding: 4px 0px;
   font-size: 12px;
 }
-/* @media (min-width: 768px) {
-  .giftRow{
-    display: -webkit-inline-box;
-  }
-  
-} */
 
 .giftItems {
   border: 1px solid;
@@ -652,7 +646,7 @@ footer .logo {
 }
 
 #createaccount + span {
-  background: #eeaa9c;
+  background: #000000;
   padding: 10px;
   margin-top: 12px;
   display: inline-block;
@@ -665,35 +659,63 @@ span.woocommerce-terms-and-conditions-checkbox-text {
   top: -6px;
   left: 20px;
 }
-.woocommerce-shipping-fields,
-.woocommerce-additional-fields {
-  display: none;
-}
+
 .addressFields {
   display: none;
 }
 
-#billing_first_name_field,
+/* #billing_first_name_field,
 #billing_last_name_field,
 #billing_address_1_field,
 #billing_state_field,
 #billing_phone_field {
   display: none;
+}  */
+
+#billing_first_name,
+#billing_last_name,
+#billing_address_1,
+.select2-container--default .select2-selection--single,
+.select2-container--open .select2-dropdown--below,
+#billing_phone,
+
+#shipping_first_name,
+#shipping_last_name,
+#shipping_address_1,
+#shipping_phone,
+#order_comments,
+#datepicker
+{
+  border: 1px solid #afafaf;
 }
 #billing_email,
 #account_password {
-  border: 1px solid #eeaa9c;
+  border: 1px solid #afafaf;
 }
+
 .woocommerce-billing-fields > h3 {
-  display: none;
+  font-size: 30px !important;
+  font-family: sans-serif;
+  padding-bottom: 20px;
+}
+.woocommerce-shipping-fields > h3 span {
+  font-size: 30px !important;
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+.ddfwCalander:before {
+  top: 0;
+  width: 20px;
 }
 
 p#billing_email_field {
-  position: relative;
-  top: 145px;
-  width: 47%;
-  float: right;
-  left: 600px;
+  /* position: absolute;
+  top: 223px; */
+  /* width: 30%; */
+  /* float: right; */
+  /* display: block;
+  right: 15px; */
 }
 .checkbox .required {
   position: absolute;
@@ -701,13 +723,73 @@ p#billing_email_field {
   top: -10px;
 }
 input#username,
-input#password, input#coupon_code {
-  border: 1px solid #eeaa9c;
+input#password,
+input#coupon_code {
+  border: 1px solid #afafaf;
 }
 
 .woocommerce-order-received .woocommerce-customer-details {
   display: none;
 }
-li.menu_user_currency{
+li.menu_user_currency {
   display: none;
+}
+
+.open .flatpickr-calendar {
+  width: 94%;
+  left: 12px;
+  top: 45px;
+  border: 1px solid #aece89;
+  border-radius: 0;
+}
+
+td.today:hover .flatpickr-day {
+  border-color: #98b27b !important;
+  background-color: #aece89 !important;
+}
+.today .flatpickr-day {
+  border-color: #697858 !important;
+}
+
+label.error {
+  position: absolute;
+  margin-left: 10px;
+  background: #f2dede;
+  color: #9b0101;
+  padding: 8px;
+  font-weight: 400;
+}
+.valid {
+  background: #aece8975;
+  color: #44493f;
+}
+.phone-invalid {
+  padding: 1px;
+  text-align: center;
+  display: none;
+  width: 60%;
+  margin: 0 auto;
+}
+.check-mark:after {
+  content: "\2713 ";
+  font-size: 13px;
+  padding-left: 4px;
+  color: rgb(255, 255, 255);
+}
+.select2-container--default .select2-selection--single {
+  border-radius: 0;
+  height: 45px;
+}
+#select2-billing_state-container, #select2-shipping_state-container{
+  line-height: 45px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+  top: 10px;
+}
+#for_delivery_on_btn, #save_location_address, #save_billing_address, #to_payment_btn{
+  background: black;
+  letter-spacing: 2px;
+}
+#orderDetails{
+  color: black;
 }

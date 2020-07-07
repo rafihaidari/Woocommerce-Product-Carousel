@@ -69,5 +69,23 @@ class MiscFunctions
         {
             echo '<p><strong>' . __('Shipping Phone') . ':</strong> ' . get_post_meta($order->id, '_shipping_phone', true) . '</p>';
         }
+
+        function shipchange($translated_text, $text, $domain)
+        {
+            switch ($translated_text) {
+                case 'Ship to a different address?':
+                    $translated_text = __('Shipping address', 'woocommerce');
+                    break;
+            }
+            return $translated_text;
+        }
+        add_filter('gettext', 'shipchange', 20, 3);
+
+
+        function isa_order_received_text($text, $order)
+        {
+            return '<div class="alert alert-success" style="font-size: 16px;text-align:center;font-weight: 500;border-radius: 0;"><b>DONE!</b> Thank you. Please check your email for order detail and receipt.</div>';
+        }
+        add_filter('woocommerce_thankyou_order_received_text', 'isa_order_received_text', 10, 2);
     }
 }
